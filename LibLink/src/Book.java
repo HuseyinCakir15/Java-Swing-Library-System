@@ -14,10 +14,21 @@ public class Book {
     }
 
 
-    public String getTitle() { return title; }
-    public String getAuthor() { return author; }
-    public int getPageCount() { return pageCount; }
-    public boolean isBorrowed() { return isBorrowed; }
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
 
 
     public void setBorrowed(boolean borrowed) {
@@ -33,7 +44,7 @@ public class Book {
         info += "\nAuthor: " + author;
         info += "\nPages: " + pageCount;
         info += "\nStatus: " + status;
-        info +="\n";
+        info += "\n";
 
         return info;
     }

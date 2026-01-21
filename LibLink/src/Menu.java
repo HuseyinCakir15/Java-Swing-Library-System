@@ -5,30 +5,30 @@ import java.awt.event.ActionListener;
 public class Menu extends JFrame {
     private Library library;
 
-    Menu(Library library){
+    Menu(Library library) {
         setTitle("Menu");
         setLayout(null);
-        setSize(400,600);
+        setSize(400, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton personnelButton = new JButton("Personnel");
-        personnelButton.setBounds(100,50,200,50);
+        personnelButton.setBounds(100, 50, 200, 50);
         add(personnelButton);
         personnelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPasswordField passwordField = new JPasswordField();
                 Object[] message = {
-                    "Enter Password: ", passwordField
+                        "Enter Password: ", passwordField
                 };
-                int option = JOptionPane.showConfirmDialog(null,message,"Login",JOptionPane.OK_CANCEL_OPTION);
-                if(option== JOptionPane.OK_OPTION){
+                int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
+                if (option == JOptionPane.OK_OPTION) {
                     String enterPassword = new String(passwordField.getPassword());
 
-                    if(enterPassword.equals("123")){
+                    if (enterPassword.equals("123")) {
                         new PersonnelScreen(library);
-                    }else{
-                        JOptionPane.showMessageDialog(null,"False Password","Error",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "False Password", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
 
@@ -42,9 +42,20 @@ public class Menu extends JFrame {
         guestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GuestScreen(library);
+                String inputId = JOptionPane.showInputDialog(null, "Please Enter ID", "Guest Entered", JOptionPane.OK_CANCEL_OPTION);
+                if (inputId != null && !inputId.isEmpty()) {
+                    int id = Integer.parseInt(inputId);
+                    Guest foundedGuest = library.findGuest(id);
+
+                    if (foundedGuest != null) {
+                        JOptionPane.showMessageDialog(null, "Welcom Library" + foundedGuest.getName());
+                        new GuestScreen(library, foundedGuest);
+                    }
+                }
             }
         });
+
+
         setVisible(true);
     }
 }
